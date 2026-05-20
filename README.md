@@ -13,6 +13,15 @@ This repository gives you a practical starting point for:
 
 The goal is not to make an autonomous developer. The goal is to make coding agents safer, cheaper, and more predictable.
 
+## Read the Full Guides
+
+This repository is the copy-paste companion to two practical articles:
+
+- [AI Agents in the Development Workflow](https://alexsinyaev.com/ai-agents-in-development-workflow/) — the safety model: permissions, MCP, browser verification, review gates, and what should stay human-owned.
+- [Claude Code Subagents: Copy-Paste Agents for Safer, Cheaper Workflows](https://alexsinyaev.com/claude-code-subagents-token-optimization/) — the subagent setup: explorer, planner, reviewer, browser tester, model routing, and token discipline.
+
+Start with the workflow article if you are defining what an agent should be allowed to do. Use this repository when you are ready to copy the files into a real PHP, WordPress, Bedrock, or Laravel project.
+
 ## File Roles
 
 Use `AGENTS.md` for rules that should apply across tools:
