@@ -4,14 +4,46 @@ Best-practice Claude Code agent setup for PHP projects: WordPress, Bedrock, Lara
 
 This repository gives you a practical starting point for:
 
-- `AGENTS.md` project rules
-- `CLAUDE.md` project memory for Claude Code
+- shared `AGENTS.md` rules for coding assistants
+- Claude Code-specific `CLAUDE.md` delegation rules
 - reusable Claude Code subagents in `.claude/agents/`
 - model routing between Haiku, Sonnet, and Opus
 - MCP safety rules
 - WordPress/Bedrock and Laravel templates
 
 The goal is not to make an autonomous developer. The goal is to make coding agents safer, cheaper, and more predictable.
+
+## File Roles
+
+Use `AGENTS.md` for rules that should apply across tools:
+
+- Claude Code
+- Codex
+- Gemini CLI
+- Cursor
+- Copilot-style agents
+- other coding assistants that read repository instructions
+
+Use `CLAUDE.md` for Claude Code-specific behavior:
+
+- subagent delegation
+- `.claude/agents/` routing
+- Opus/Sonnet/Haiku policy
+- Claude Code MCP tool assumptions
+- anti-loop and token discipline for subagents
+
+Recommended setup:
+
+```md
+# CLAUDE.md
+@AGENTS.md
+
+## Claude Code: AI Delegation Rules
+
+Claude-specific rules go here.
+```
+
+This keeps shared project policy portable while still giving Claude Code detailed subagent instructions.
 
 ## Quick Start
 
@@ -32,6 +64,14 @@ Then edit `AGENTS.md` for your project:
 - MCP tools available in your environment
 - manual steps that must stay human-owned
 
+Then edit `CLAUDE.md` for your Claude Code setup:
+
+- available subagents
+- model choices
+- when to use explorer/planner/reviewer/browser-tester
+- project-specific escalation rules
+- local dev server requirements
+
 For framework-specific examples, start from one of these templates:
 
 ```text
@@ -40,17 +80,6 @@ templates/wordpress-bedrock/
 templates/wordpress-classic/
 templates/laravel/
 ```
-
-## Recommended Claude Code Setup
-
-Use one source of truth for project instructions:
-
-```md
-# CLAUDE.md
-@AGENTS.md
-```
-
-Keep the durable rules in `AGENTS.md`. Keep tool-specific wrappers thin.
 
 ## Included Subagents
 
@@ -80,7 +109,7 @@ Keep the durable rules in `AGENTS.md`. Keep tool-specific wrappers thin.
 - MCP servers are treated like dependencies with credentials.
 - Raw logs and huge outputs are summarized before reaching expensive models.
 
-Read more in [docs/safety-model.md](docs/safety-model.md) and [docs/model-routing.md](docs/model-routing.md).
+Read more in [docs/safety-model.md](docs/safety-model.md), [docs/model-routing.md](docs/model-routing.md), and [docs/tool-specific-instructions.md](docs/tool-specific-instructions.md).
 
 ## Repository Philosophy
 
