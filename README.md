@@ -1,6 +1,6 @@
 # Claude Code PHP Agents
 
-Best-practice Claude Code agent setup for PHP projects: WordPress, Bedrock, Laravel, Symfony-style applications, and smaller custom PHP codebases.
+Best-practice Claude Code agent setup for PHP projects: WordPress (Bedrock and classic), Laravel, and smaller custom PHP codebases.
 
 This repository gives you a practical starting point for:
 
@@ -13,6 +13,14 @@ This repository gives you a practical starting point for:
 
 The goal is not to make an autonomous developer. The goal is to make coding agents safer, cheaper, and more predictable.
 
+## Prerequisites
+
+- [Claude Code](https://code.claude.com) installed and authenticated (not just the Claude API)
+- A PHP project with Git initialized
+- Optional but recommended: Chrome DevTools MCP configured for the `browser-tester` agent (see [docs/mcp-setup.md](docs/mcp-setup.md))
+
+Subagent model routing requires Claude Code. The `.claude/agents/` convention is a Claude Code feature, not the Claude API.
+
 ## Read the Full Guides
 
 This repository is the copy-paste companion to two practical articles:
@@ -21,6 +29,41 @@ This repository is the copy-paste companion to two practical articles:
 - [Claude Code Subagents: Copy-Paste Agents for Safer, Cheaper Workflows](https://alexsinyaev.com/claude-code-subagents-token-optimization/) — the subagent setup: explorer, planner, reviewer, browser tester, model routing, and token discipline.
 
 Start with the workflow article if you are defining what an agent should be allowed to do. Use this repository when you are ready to copy the files into a real PHP, WordPress, Bedrock, or Laravel project.
+
+## Quick Start
+
+**Framework-specific projects:** start from a template instead of the root files.
+
+```bash
+# WordPress Bedrock
+cp -r templates/wordpress-bedrock/. /path/to/your-project/
+
+# WordPress Classic
+cp -r templates/wordpress-classic/. /path/to/your-project/
+
+# Laravel
+cp -r templates/laravel/. /path/to/your-project/
+
+# Generic PHP
+cp -r templates/generic-php/. /path/to/your-project/
+```
+
+Then copy the subagents:
+
+```bash
+mkdir -p /path/to/your-project/.claude/agents
+cp .claude/agents/*.md /path/to/your-project/.claude/agents/
+```
+
+**Generic setup** (no specific framework):
+
+```bash
+cp AGENTS.md CLAUDE.md /path/to/your-project/
+mkdir -p /path/to/your-project/.claude/agents
+cp .claude/agents/*.md /path/to/your-project/.claude/agents/
+```
+
+After copying, open `AGENTS.md` and fill in the **Project Setup** and **Common Commands** sections with real commands for your project. Then open `CLAUDE.md` and update the local dev server URL.
 
 ## File Roles
 
@@ -54,42 +97,6 @@ Claude-specific rules go here.
 
 This keeps shared project policy portable while still giving Claude Code detailed subagent instructions.
 
-## Quick Start
-
-Copy the base files into your project:
-
-```bash
-cp AGENTS.md CLAUDE.md /path/to/your-project/
-mkdir -p /path/to/your-project/.claude/agents
-cp .claude/agents/*.md /path/to/your-project/.claude/agents/
-```
-
-Then edit `AGENTS.md` for your project:
-
-- real commands for test, lint, build, and local dev
-- framework versions
-- deployment rules
-- folders the agent must not edit
-- MCP tools available in your environment
-- manual steps that must stay human-owned
-
-Then edit `CLAUDE.md` for your Claude Code setup:
-
-- available subagents
-- model choices
-- when to use explorer/planner/reviewer/browser-tester
-- project-specific escalation rules
-- local dev server requirements
-
-For framework-specific examples, start from one of these templates:
-
-```text
-templates/generic-php/
-templates/wordpress-bedrock/
-templates/wordpress-classic/
-templates/laravel/
-```
-
 ## Included Subagents
 
 ```text
@@ -118,10 +125,14 @@ templates/laravel/
 - MCP servers are treated like dependencies with credentials.
 - Raw logs and huge outputs are summarized before reaching expensive models.
 
-Read more in [docs/safety-model.md](docs/safety-model.md), [docs/model-routing.md](docs/model-routing.md), and [docs/tool-specific-instructions.md](docs/tool-specific-instructions.md).
+Read more in [docs/safety-model.md](docs/safety-model.md), [docs/model-routing.md](docs/model-routing.md), and [docs/mcp-setup.md](docs/mcp-setup.md).
 
 ## Repository Philosophy
 
 This is intentionally small. Copy the files, adapt them, and delete anything that does not match your project.
 
 Good agent instructions are specific to the repository. These files are a starting point, not a universal policy.
+
+## License
+
+MIT
