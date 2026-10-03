@@ -10,7 +10,7 @@ They configure how the main Claude Code session delegates work to subagents defi
 
 Copy the subagents from the root `.claude/agents/` directory into your project and adjust model names if needed.
 
-See also: [docs/wordpress-notes.md](../../docs/wordpress-notes.md) for WordPress- and Bedrock-specific caveats on caching, WP-CLI risk, multilingual slugs, and additive customization.
+See also: [docs/wordpress-notes.md](https://github.com/lex127/claude-code-php-agents/blob/main/docs/wordpress-notes.md) in claude-code-php-agents for WordPress- and Bedrock-specific caveats on caching, WP-CLI risk, multilingual slugs, and additive customization.
 
 ## Available Subagents
 
