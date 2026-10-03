@@ -15,13 +15,13 @@ The `browser-tester` agent uses Chrome DevTools MCP for UI smoke testing. Instal
   "mcpServers": {
     "chrome-devtools": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-chrome-devtools"]
+      "args": ["-y", "chrome-devtools-mcp@latest"]
     }
   }
 }
 ```
 
-The tool names in `browser-tester.md` use the prefix `mcp__chrome_devtools__`. If your local MCP server registers under a different name, update the `tools:` list in `.claude/agents/browser-tester.md` to match.
+The tool names in `browser-tester.md` use the prefix `mcp__chrome-devtools__`, which matches the `chrome-devtools` server name above. If your local MCP server registers under a different name, update the `tools:` list in `.claude/agents/browser-tester.md` to match.
 
 To verify the tool names available in your session, run `/mcp` in Claude Code.
 
@@ -96,4 +96,4 @@ Do not give agents automatic access to:
 
 ## Tool Naming
 
-MCP tool names vary by environment. The `browser-tester` agent includes example Chrome DevTools MCP tool names. Adjust them to match your local MCP server names. Run `/mcp` in Claude Code to list available tools in the current session.
+Claude Code names MCP tools `mcp__<server-name>__<tool-name>` and keeps hyphens from the server name, so a server registered as `chrome-devtools` exposes `mcp__chrome-devtools__navigate_page`. If you register the server under another name, adjust the `tools:` list in `browser-tester.md` to match. Run `/mcp` in Claude Code to list available tools in the current session.
