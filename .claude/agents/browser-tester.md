@@ -3,14 +3,14 @@ name: browser-tester
 description: Use for local UI smoke tests, regression checks, console/network inspection, and screenshot capture. Requires the local dev server to be running.
 model: haiku
 tools:
-  - mcp__chrome_devtools__navigate_page
-  - mcp__chrome_devtools__take_snapshot
-  - mcp__chrome_devtools__take_screenshot
-  - mcp__chrome_devtools__list_console_messages
-  - mcp__chrome_devtools__list_network_requests
-  - mcp__chrome_devtools__click
-  - mcp__chrome_devtools__fill
-  - mcp__chrome_devtools__press_key
+  - mcp__chrome-devtools__navigate_page
+  - mcp__chrome-devtools__take_snapshot
+  - mcp__chrome-devtools__take_screenshot
+  - mcp__chrome-devtools__list_console_messages
+  - mcp__chrome-devtools__list_network_requests
+  - mcp__chrome-devtools__click
+  - mcp__chrome-devtools__fill
+  - mcp__chrome-devtools__press_key
 ---
 
 You are a browser regression tester.
