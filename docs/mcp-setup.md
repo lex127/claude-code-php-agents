@@ -4,7 +4,7 @@ MCP servers give agents access to external systems. Use them deliberately.
 
 ## Configuration
 
-Claude Code reads MCP servers from `.mcp.json` in the project root or from `~/.claude/settings.json` for user-level servers. Project-level `.mcp.json` is committed to the repo and applies to everyone on the team. Add it to `.gitignore` if it contains personal tokens.
+Claude Code reads project-scoped MCP servers from `.mcp.json` in the project root. Servers added with `claude mcp add --scope local` or `--scope user` are stored in `~/.claude.json`; `~/.claude/settings.json` does not hold MCP servers. The project `.mcp.json` is committed to the repo and applies to everyone on the team, so keep tokens out of it: Claude Code expands `${VAR}` references in `command`, `args`, `env`, `url` and `headers`.
 
 ### Chrome DevTools MCP (browser-tester)
 
@@ -27,21 +27,32 @@ To verify the tool names available in your session, run `/mcp` in Claude Code.
 
 ### GitHub MCP
 
+Use GitHub's official remote server. The `@modelcontextprotocol/server-github` npm package is deprecated.
+
 ```json
 {
   "mcpServers": {
     "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "<your-token-here>"
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_PAT}"
       }
     }
   }
 }
 ```
 
-Use a fine-grained personal access token scoped to one repository with only the permissions the task needs. Do not commit real tokens to the repo — use environment variable references or add `.mcp.json` to `.gitignore`.
+Or add it for yourself only, without touching `.mcp.json`:
+
+```bash
+claude mcp add --transport http github https://api.githubcopilot.com/mcp/ \
+  --header "Authorization: Bearer YOUR_GITHUB_PAT"
+```
+
+If you prefer a local server, GitHub also publishes it as the `ghcr.io/github/github-mcp-server` Docker image.
+
+Use a fine-grained personal access token scoped to one repository with only the permissions the task needs. Keep the token in your environment (`GITHUB_PAT` above), never in a committed file.
 
 ### Laravel-specific MCP (optional)
 
